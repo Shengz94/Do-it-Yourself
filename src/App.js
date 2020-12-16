@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Overview from "./components/Overview";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = { 
+      task: '', 
+      tasks: [] 
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.submitTask = this.submitTask.bind(this);
+  }
+  
+  handleChange(e) {
+    this.setState({task: e.target.value});
+  }
+
+  submitTask(){
+    this.setState((state) => {
+      const temporalTasks = state.tasks.concat(state.task);
+      return {tasks: temporalTasks};
+    });
+  }
+  
+  render(){
+    const task = this.state.task;
+    const tasks = this.state.tasks;
+    return (
+      <div className="App">
+        <fieldset>
+          <legend>Input task:</legend>
+          <input value={task} onChange={this.handleChange}/>
+        </fieldset>
+        <button onClick={this.submitTask}>Submit</button>
+        <Overview tasks={tasks}/>
+      </div>
+    );
+  }
 }
 
 export default App;
