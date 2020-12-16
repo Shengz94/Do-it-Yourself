@@ -1,16 +1,17 @@
 import React, { Component } from "react";
+import uniqid from "uniqid"
 
 class Overview extends Component {
-    constructor(props){
-        super(props);
-    }
 
     render(){
         return(
             <div>
                 <ul>
                     {this.props.tasks.map((item, index) => (
-                        <li key={index}>{item}</li>
+                        <div  key={uniqid()}>
+                            <li>{index + ".- " + item}</li>
+                            <button onClick={(e) => this.props.removeTask(item, e)}>Remove</button>
+                        </div>
                     ))}
                 </ul>
             </div>

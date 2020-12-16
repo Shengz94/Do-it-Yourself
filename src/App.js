@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Overview from "./components/Overview";
+import "./App.css"
 
 class App extends Component {
 
@@ -12,6 +13,7 @@ class App extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitTask = this.submitTask.bind(this);
+    this.removeTask = this.removeTask.bind(this);
   }
   
   handleChange(e) {
@@ -21,7 +23,14 @@ class App extends Component {
   submitTask(){
     this.setState((state) => {
       const temporalTasks = state.tasks.concat(state.task);
-      return {tasks: temporalTasks};
+      return {tasks: temporalTasks, task: ""};
+    });
+  }
+
+  removeTask(item){
+    this.setState((state) => {
+      const temporalTasks = state.tasks.filter(task => task !== item);
+      return {tasks: temporalTasks, task: ""};
     });
   }
   
@@ -35,7 +44,7 @@ class App extends Component {
           <input value={task} onChange={this.handleChange}/>
         </fieldset>
         <button onClick={this.submitTask}>Submit</button>
-        <Overview tasks={tasks}/>
+        <Overview tasks={tasks} removeTask={this.removeTask}/>
       </div>
     );
   }
