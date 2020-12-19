@@ -14,6 +14,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.submitTask = this.submitTask.bind(this);
     this.removeTask = this.removeTask.bind(this);
+    this.editTask = this.editTask.bind(this);
   }
   
   handleChange(e) {
@@ -21,10 +22,12 @@ class App extends Component {
   }
 
   submitTask(){
-    this.setState((state) => {
-      const temporalTasks = state.tasks.concat(state.task);
-      return {tasks: temporalTasks, task: ""};
-    });
+    if(!(this.state.tasks.includes(this.state.task))){
+      this.setState((state) => {
+        const temporalTasks = state.tasks.concat(state.task);
+        return {tasks: temporalTasks, task: ""};
+      });
+    }
   }
 
   removeTask(item){
@@ -33,6 +36,20 @@ class App extends Component {
       return {tasks: temporalTasks, task: ""};
     });
   }
+
+  editTask(item, newItem){
+    this.setState((state) => {
+      const temporalTasks = state.tasks.map(task => {
+        if(task !== item){
+          return task;
+        }
+        return newItem;
+      });
+      return {tasks: temporalTasks, task: ""};
+    });
+  }
+
+
   
   render(){
     const task = this.state.task;
@@ -44,7 +61,7 @@ class App extends Component {
           <input value={task} onChange={this.handleChange}/>
         </fieldset>
         <button onClick={this.submitTask}>Submit</button>
-        <Overview tasks={tasks} removeTask={this.removeTask}/>
+        <Overview tasks={tasks} removeTask={this.removeTask} editTask={this.editTask}/>
       </div>
     );
   }
