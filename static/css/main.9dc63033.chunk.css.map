@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/App.css"],"names":[],"mappings":"AAAA,KACI,WAAY,CACZ,WACJ,CACA,SACI,aACJ","file":"main.9dc63033.chunk.css","sourcesContent":[".App{\n    width: 300px;\n    margin: auto;\n}\nfieldset{\n    margin: 10px 0px;\n}"]}
