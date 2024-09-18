@@ -40,6 +40,6 @@
   },
   "homepage": "https://shengz94.github.io/To-Do-List/",
   "devDependencies": {
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^5.0.0"
   }
 }
